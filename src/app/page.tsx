@@ -11,7 +11,9 @@ export default async function Home() {
 
 	return (
 		<div className="flex flex-col gap-4">
-			<h1 className="text-2xl">Todo List</h1>
+			<header>
+				<h1 className="text-2xl">Todo List</h1>
+			</header>
 			<div>
 				<form className="flex gap-2" action={createTodo}>
 					<input
