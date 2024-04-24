@@ -1,18 +1,7 @@
 import { client } from "@/lib/client";
+import type { DataType } from "@/types/todo";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
-
-type dataType = {
-	contents: contentsType[];
-	totalCount: number;
-	limit: number;
-	offset: number;
-};
-
-type contentsType = {
-	id: string;
-	title: string;
-};
 
 const createTodo = async (formData: FormData) => {
 	"use server";
@@ -28,7 +17,7 @@ const createTodo = async (formData: FormData) => {
 };
 
 export default async function Home() {
-	const data: dataType = await client.get({
+	const data: DataType = await client.get({
 		endpoint: "todo",
 		queries: { fields: "id,title" },
 	});
