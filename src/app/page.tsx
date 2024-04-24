@@ -1,32 +1,7 @@
+import { createTodo, deleteTodo } from "@/actions/todo";
 import { client } from "@/lib/client";
 import type { DataType } from "@/types/todo";
-import { revalidatePath } from "next/cache";
 import Link from "next/link";
-
-const createTodo = async (formData: FormData) => {
-	"use server";
-	const title = formData.get("title") as string;
-	const sendData = `{"title":"${title}"}`;
-
-	await client.create({
-		endpoint: "todo",
-		content: JSON.parse(sendData),
-	});
-
-	revalidatePath("/", "page");
-};
-
-const deleteTodo = async (FormData: FormData) => {
-	"use server";
-	const id = FormData.get("id") as string;
-
-	await client.delete({
-		endpoint: "todo",
-		contentId: id,
-	});
-
-	revalidatePath("/", "page");
-};
 
 export default async function Home() {
 	const data: DataType = await client.get({

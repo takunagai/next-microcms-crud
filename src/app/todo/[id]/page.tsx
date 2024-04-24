@@ -1,15 +1,14 @@
+import { updateTodo } from "@/actions/todo";
 import { client } from "@/lib/client";
 import type { DataType } from "@/types/todo";
-import { revalidatePath } from "next/cache";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 type Props = {
 	id: string;
 	title: string;
 };
 
-export default async function updateTodo({ params }: { params: Props }) {
+export default async function todoEdit({ params }: { params: Props }) {
 	const data: DataType = await client.get({
 		endpoint: "todo",
 		// TODO: `contentId: params.id,` を使った実装に (https://note.com/chihi_note/n/ncfefca6f8c5c)
@@ -18,23 +17,6 @@ export default async function updateTodo({ params }: { params: Props }) {
 			filters: `id[equals]${params.id}`,
 		},
 	});
-
-	const updateTodo = async (formData: FormData) => {
-		"use server";
-		const id = formData.get("id") as string;
-		const title = formData.get("title") as string;
-		const sendData = `{"title":"${title}"}`;
-
-		await client.update({
-			endpoint: "todo",
-			contentId: id,
-			content: JSON.parse(sendData),
-		});
-
-		revalidatePath("/", "page");
-		revalidatePath("/todo/[id]", "page");
-		redirect("/");
-	};
 
 	return (
 		<div className="flex flex-col gap-4">
