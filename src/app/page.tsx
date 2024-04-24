@@ -1,5 +1,6 @@
 import { client } from "@/lib/client";
 import { revalidatePath } from "next/cache";
+import Link from "next/link";
 
 type dataType = {
 	contents: contentsType[];
@@ -54,7 +55,13 @@ export default async function Home() {
 					<ul>
 						{data?.contents.map((value) => (
 							<li key={value.id} className="list-inside list-disc">
-								{value.title}
+								{value.title}{" "}
+								<Link
+									href={`/todo/${value.id}`}
+									className="text-sm underline text-blue-500 hover:text-blue-400"
+								>
+									編集
+								</Link>
 							</li>
 						))}
 					</ul>
