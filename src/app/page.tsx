@@ -55,7 +55,7 @@ export default async function Home() {
 				{data?.totalCount ? (
 					<ul>
 						{data?.contents.map((value) => (
-							<li key={value.id} className="list-inside list-disc">
+							<li key={value.id} className="flex gap-2">
 								{value.title}{" "}
 								<Link
 									href={`/todo/${value.id}`}
