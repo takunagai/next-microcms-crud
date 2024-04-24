@@ -16,6 +16,18 @@ const createTodo = async (formData: FormData) => {
 	revalidatePath("/", "page");
 };
 
+const deleteTodo = async (FormData: FormData) => {
+	"use server";
+	const id = FormData.get("id") as string;
+
+	await client.delete({
+		endpoint: "todo",
+		contentId: id,
+	});
+
+	revalidatePath("/", "page");
+};
+
 export default async function Home() {
 	const data: DataType = await client.get({
 		endpoint: "todo",
@@ -51,6 +63,15 @@ export default async function Home() {
 								>
 									編集
 								</Link>
+								<form action={deleteTodo} className="inline">
+									<input type="hidden" name="id" value={value.id} />
+									<button
+										type="submit"
+										className="text-sm underline text-red-500 hover:text-red-400"
+									>
+										削除
+									</button>
+								</form>
 							</li>
 						))}
 					</ul>
