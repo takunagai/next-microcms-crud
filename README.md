@@ -1,19 +1,32 @@
 # Next.js14 と microCMS で CRUD の実装
 
+## 概要
+
+Next.js14 と microCMS で Todoリストを作成、CRUD 基本実装の練習を行う。
+
+## 使用技術
+
+* Next.js 14.2.2
+  - App Directory, Server Action
+* TypeScript
+* microCMS
+* Tailwind CSS
+* Biome
+* husky, lint-staged
+
 ## 参考
 
 * ベース：[Next.js14とmicroCMSでCRUDの実装 - Zenn](https://zenn.dev/arsaga/articles/15dba8cf8ad430#プロジェクトの作成)
-* 
 
 ## メモ
 
-* microCMS の管理画面で、POST/PUT/PATCH/DELETE 等の権限を許可する
+* microCMS の管理画面で、POST/PATCH/DELETE の権限を許可する (PUT は不要)
 
 ## 参考の元コードと変えたところ
 
 ### 開発環境
 
-* ESLint の代わりに biome を使う
+* ESLint の代わりに biome を採用
   - ESLint, Prettier, prettier-plugin-tailwindcss の代替
   - Jetbrains IDE に biome プラグインを追加
   - 参考：[Getting Started - Biome](https://biomejs.dev/guides/getting-started/)
@@ -26,13 +39,13 @@
     + [Get started - Husky](https://typicode.github.io/husky/get-started.html)
     + [lint-staged/lint-staged - Github](https://github.com/lint-staged/lint-staged)
     + [Git Hooks - Biome](https://biomejs.dev/recipes/git-hooks/#husky)
-* 環境変数を .env.local にまとめる
+* microCMS の API キーを環境変数に (.env.local) 
   - .env.local は .gitignore でバージョン管理から外す
 
 ### ページ
 
 * ページのディレクトリ構成を変更
-  - 一覧、詳細、新規作成、編集のページ、元記事では todo/page.tsx だったが、app/pages に変更
+  - 一覧ページ、元記事では todo/page.tsx だったが、トップページ (app/pages) に変更
 
 ### その他
 
